@@ -1,0 +1,30 @@
+{
+  "name": "software_engineer_interview",
+  "version": "0.0.1",
+  "description": "A node/express application that does captcha-style word-count provision and validation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node node_modules/jasmine/bin/jasmine.js spec/serverSpec.js --reporter=jasmine-ts-console-reporter"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "devDependencies": {
+    "jasmine": "^3.1.0",
+    "jasmine-ts-console-reporter": "^3.1.1",
+    "request": "^2.87.0"
+  }
+}
