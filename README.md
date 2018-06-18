@@ -1,4 +1,4 @@
-# Rocketrip
+# Word Count Captcha
 #### A node/express application that does captcha-style word-count provision and validation
 
 ### Setup
