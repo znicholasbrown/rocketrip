@@ -74,26 +74,34 @@ app.get("/", function (request, response) {
 app.use(bodyParser.json())
 
 app.post("/", function (request, response) {
-  const query = request.body
-  const body = query.body
-  const exclude = query.exclude
-  const clientCount = query.count
-  const realCount = countWords(body, exclude)
-
-  if ( clientCount == realCount.count ) {
-    response.writeHead(200);
+  if (typeof request.body !== 'object' || request.headers['content-type'] !== 'application/json') { // Check to be sure the requester has sent the correct body
+    if (request['content-type'] !== 'application/json') response.writeHead(400, 'Server was expecting a content-type of "application/json" but instead recieved a content-type of ' + request.headers['content-type']);
+    if (typeof request.body !== 'object') response.writeHead(400, 'Server was expecting a body of type "object" but instead recieved a body of type ' + typeof request.body);
     response.send();
+    return;
   } else {
-    let data = {
-      body: body,
-      exclude: exclude,
-      attemptedCount: clientCount,
-      actualCount: realCount.count,
-      excludedBreakdown: realCount.breakdown
-    }
-    response.writeHead(400, JSON.stringify(data));
 
-    response.send();
+    const query = request.body
+    const body = query.body
+    const exclude = query.exclude
+    const clientCount = query.count
+    const realCount = countWords(body, exclude)
+
+    if ( clientCount == realCount.count ) {
+      response.writeHead(200);
+      response.send();
+    } else {
+      let data = {
+        body: body,
+        exclude: exclude,
+        attemptedCount: clientCount,
+        actualCount: realCount.count,
+        excludedBreakdown: realCount.breakdown
+      }
+      response.writeHead(400, JSON.stringify(data));
+
+      response.send();
+    }
   }
 })
 
