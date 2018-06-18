@@ -34,3 +34,9 @@ To gracefully shutdown the server, press `CTRL C` in the terminal and you should
 ```Shutting down server...
 Server shutdown complete.
 ```
+
+
+### Custom Captcha library
+If you would like to use a custom captcha library (rather than the default eloisaToAbelard), the server takes a command line argument path to a file that exports an array of strings to use as captcha samples like such:
+
+`node server.js /path/to/string/array`
